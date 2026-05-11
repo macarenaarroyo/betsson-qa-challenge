@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 
 export class CheckoutPage {
   readonly page: Page;
@@ -27,6 +27,5 @@ export class CheckoutPage {
     await this.fillFirstname(firstname);
     await this.fillLastname(lastname);
     await this.fillZipcode(zipcode);
-    await this.clickContinue();
   }
 }

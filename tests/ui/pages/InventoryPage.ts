@@ -23,11 +23,20 @@ export class InventoryPage {
     await this.page.locator(locator).click();
   }
 
-  async verifyCartBadgeCount() {
-    return this.page.locator('[data-test="shopping_cart_badge"]').textContent();
+  async verifyCartBadgeCount(expectedCount: number) {
+    if (expectedCount > 0) {
+      // Badge should be visible and show correct count
+      await expect(this.page.locator('[data-test="shopping-cart-badge"]')).toBeVisible();
+      await expect(this.page.locator('[data-test="shopping-cart-badge"]')).toHaveText(
+        String(expectedCount)
+      );
+    } else {
+      // Badge should not be visible when cart is empty
+      await expect(this.page.locator('[data-test="shopping-cart-badge"]')).not.toBeVisible();
+    }
   }
 
   async openShoppingCart() {
-    await this.page.locator('[data-test="shopping_cart_link"]').click();
+    await this.page.locator('[data-test="shopping-cart-link"]').click();
   }
 }

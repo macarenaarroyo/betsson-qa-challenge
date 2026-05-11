@@ -7,6 +7,11 @@ export class CartPage {
     this.page = page;
   }
 
+  async removeItemFromCart(productName: string) {
+    const slug = productName.toLowerCase().replace(/ /g, '-');
+    await this.page.locator(`[data-test="remove-${slug}"]`).click();
+  }
+
   async verifyItemInCart(productName: string) {
     await expect(
       this.page.locator('[data-test="inventory-item-name"]').filter({ hasText: productName })
